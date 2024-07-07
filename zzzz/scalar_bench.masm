@@ -1,0 +1,96 @@
+use.std::math::secp256k1::scalar_field
+
+begin
+    push.3695133146
+    push.11489664
+    push.1407189293
+    push.1332177784
+    push.2106542718
+    push.2236955964
+    push.60155476
+    push.1259054195
+    push.3258836281
+    push.3421809437
+    push.2051320959
+    push.974571799
+    push.353127114
+    push.2315165624
+    push.3668493121
+    push.1494159694
+    push.3360002988
+    push.234168247
+    push.1159876682
+    push.2852209138
+    push.2866424576
+    push.1088031394
+    push.1682821516
+    push.1915140291
+    push.1095895041
+    push.1359599981
+    push.2744076726
+    push.1600645591
+    push.969814285
+    push.1537333708
+    push.2222219308
+    push.1718928786
+    push.487738481
+    push.3531004100
+    push.2106589630
+    push.479244527
+    push.3871680339
+    push.2962892522
+    push.3961647168
+    push.694970425
+    push.2983146250
+    push.3343690625
+    push.4163599075
+    push.1812770566
+    push.3257770169
+    push.1524607722
+    push.1135132293
+    push.1187647059
+
+    # cache pub_key
+    loc_storew.0
+    dropw
+    loc_storew.1
+    dropw
+    loc_storew.2
+    dropw
+    loc_storew.3
+    dropw
+    loc_storew.4
+    dropw
+    loc_storew.5
+    dropw
+
+    # cache h
+    loc_storew.6
+    dropw
+    loc_storew.7
+    dropw
+
+    # cache r
+    loc_storew.8
+    dropw
+    loc_storew.9
+    dropw
+    
+    # Only s lives on stack
+    # Invert s, over secp256k1 scalar field
+    exec.scalar_field::inv
+
+    dupw.1
+    dupw.1
+
+    # on stack [s^-1, s^-1, ...]
+
+    push.0.0.0.0.0.0.0.0
+
+    # load h
+    loc_loadw.7
+    swapw
+    loc_loadw.6
+
+    exec.scalar_field::mul
+end

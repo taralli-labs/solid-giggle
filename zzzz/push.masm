@@ -1,0 +1,4 @@
+begin
+    push.1.2.3.4
+    u32shr.3
+end
