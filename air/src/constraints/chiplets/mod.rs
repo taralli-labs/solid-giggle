@@ -4,6 +4,7 @@ use super::super::{
 use crate::utils::{are_equal, binary_not, is_binary};
 use alloc::vec::Vec;
 
+mod arith;
 mod bitwise;
 mod hasher;
 mod memory;

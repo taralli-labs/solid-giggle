@@ -2,6 +2,7 @@ use super::{CHIPLETS_OFFSET, HASHER_AUX_TRACE_OFFSET};
 use core::ops::Range;
 use vm_core::{utils::range as create_range, Felt, ONE, ZERO};
 
+pub mod arith;
 pub mod bitwise;
 pub mod hasher;
 pub mod kernel_rom;
@@ -12,15 +13,19 @@ pub mod memory;
 
 /// The number of columns in the chiplets which are used as selectors for the hasher chiplet.
 pub const NUM_HASHER_SELECTORS: usize = 1;
+/// The number of columns in the chiplets which are used as selectors for the arith chiplet.///
+pub const NUM_ARITH_SELECTORS: usize = 2;
 /// The number of columns in the chiplets which are used as selectors for the bitwise chiplet.
-pub const NUM_BITWISE_SELECTORS: usize = 2;
+pub const NUM_BITWISE_SELECTORS: usize = 3;
 /// The number of columns in the chiplets which are used as selectors for the memory chiplet.
-pub const NUM_MEMORY_SELECTORS: usize = 3;
+pub const NUM_MEMORY_SELECTORS: usize = 4;
 /// The number of columns in the chiplets which are used as selectors for the kernel ROM chiplet.
-pub const NUM_KERNEL_ROM_SELECTORS: usize = 4;
+pub const NUM_KERNEL_ROM_SELECTORS: usize = 5;
 
 /// The first column of the hash chiplet.
 pub const HASHER_TRACE_OFFSET: usize = CHIPLETS_OFFSET + NUM_HASHER_SELECTORS;
+/// The first column of the arith chiplet.
+pub const ARITH_TRACE_OFFSET: usize = CHIPLETS_OFFSET + NUM_ARITH_SELECTORS;
 /// The first column of the bitwise chiplet.
 pub const BITWISE_TRACE_OFFSET: usize = CHIPLETS_OFFSET + NUM_BITWISE_SELECTORS;
 /// The first column of the memory chiplet.
@@ -49,6 +54,17 @@ pub const HASHER_RATE_COL_RANGE: Range<usize> = Range {
 };
 /// The index of the hasher's node index column in the execution trace.
 pub const HASHER_NODE_INDEX_COL_IDX: usize = HASHER_STATE_COL_RANGE.end;
+
+// --- GLOBALLY-INDEXED CHIPLET COLUMN ACCESSORS: ARITH -----------------------------------------
+
+pub const ARITH_SELECTOR_COL_IDX: usize = ARITH_TRACE_OFFSET;
+
+pub const ARITH_A_COL_IDX: usize = ARITH_TRACE_OFFSET + arith::A_COL_IDX;
+
+pub const ARITH_TRACE_RANGE: Range<usize> = Range {
+    start: ARITH_TRACE_OFFSET,
+    end: ARITH_A_COL_IDX + 1,
+};
 
 // --- GLOBALLY-INDEXED CHIPLET COLUMN ACCESSORS: BITWISE -----------------------------------------
 
